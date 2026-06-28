@@ -4,30 +4,13 @@ import React, { useState } from 'react';
 
 export default function ArcMotherboard() {
   const [activeTab, setActiveTab] = useState('dashboard');
-  const [aiResponse, setAiResponse] = useState('SYSTEM OPERATIONAL. STANDING BY FOR COMMAND.');
-  const [aiLoading, setAiLoading] = useState(false);
 
-  // Simulated live Ghost Loop chat feed for the War Room
   const ghostMessages = [
     { id: 1, user: 'Marcus | Phase 2', role: 'Operator', text: 'Just cleared the Phase 1 protocol. The mental shift alone is worth the entry fee.', time: '12:04 PM' },
     { id: 2, user: 'Operator_04', role: 'Elite', text: 'Bro, whoever designed the layout of the Vault is on another level. Clean as hell.', time: '12:08 PM' },
     { id: 3, user: 'X_Arbitrage', role: 'Operator', text: 'Is anyone else scaling Conduit A right now or is everyone on B?', time: '12:15 PM' },
     { id: 4, user: 'David_Alpha', role: 'Whale', text: 'Just hit my first $200 day using the traffic blueprint in Protocol 03. Insane.', time: '12:19 PM' },
-    { id: 5, user: 'Marcus | Phase 2', role: 'Operator', text: 'Do not sleep on Protocol 02. The capital realignment strategy is literal alpha.', time: '12:22 PM' },
   ];
-
-  const queryAiNexus = (promptType) => {
-    setAiLoading(true);
-    setAiResponse('RE-ROUTING QUANTUM CONDUITS...');
-    setTimeout(() => {
-      if (promptType === 'traffic') {
-        setAiResponse('NEXUS ANALYSIS: High-volume short-form traffic is pooling in Conduit B. Recommend immediate deployment of Protocol 03.');
-      } else if (promptType === 'arbitrage') {
-        setAiResponse('NEXUS ANALYSIS: Premium liquidity spreads detected. Execute asymmetric risk model immediately.');
-      }
-      setAiLoading(false);
-    }, 1200);
-  };
 
   return (
     <div className="min-h-screen bg-[#030A08] text-gray-100 font-sans flex flex-col md:flex-row border-4 border-[#D4AF37]">
@@ -48,7 +31,6 @@ export default function ArcMotherboard() {
               { id: 'vault', label: 'THE ARC VAULT', icon: '🔱' },
               { id: 'calculator', label: 'FINANCIAL CONDUIT', icon: '🧮' },
               { id: 'warroom', label: 'WAR ROOM (LIVE)', icon: '👁️' },
-              { id: 'announcements', label: 'GLOBAL COMMANDS', icon: '📢' },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -69,7 +51,7 @@ export default function ArcMotherboard() {
         <div className="mt-8 pt-6 border-t border-[#D4AF37]/20 font-mono text-[11px] text-gray-400 space-y-2">
           <div className="flex justify-between">
             <span>NETWORK STATUS:</span>
-            <span className="text-green-400 animate-pulse font-bold">ONLINE</span>
+            <span className="text-green-400 font-bold">ONLINE</span>
           </div>
           <div className="flex justify-between">
             <span>LIVE OPERATORS:</span>
@@ -80,8 +62,6 @@ export default function ArcMotherboard() {
 
       {/* MAIN FRAME: MISSION INTERFACE */}
       <main className="flex-1 flex flex-col bg-[#020705] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none"></div>
-
         <div className="flex-1 p-4 md:p-8 overflow-y-auto z-10">
           
           {/* TAB 1: DASHBOARD */}
@@ -109,29 +89,12 @@ export default function ArcMotherboard() {
                   <button onClick={() => setActiveTab('warroom')} className="text-[10px] text-[#FFFDD0] underline mt-4 block font-mono">Join Trenches →</button>
                 </div>
               </div>
-
-              <div className="bg-[#051812] border-2 border-[#D4AF37] p-6 rounded-none mt-8">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-2.5 h-2.5 bg-red-500 rounded-full animate-ping"></div>
-                  <h3 className="font-mono text-xs font-bold text-[#D4AF37] tracking-widest">ARC AI NEXUS INTEGRATION</h3>
-                </div>
-                <div className="bg-black/50 p-4 border border-[#D4AF37]/20 rounded-none mb-4 min-h-[60px] flex items-center">
-                  <p className={`font-mono text-xs ${aiLoading ? 'text-[#D4AF37] animate-pulse' : 'text-green-400'}`}>{aiResponse}</p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <button onClick={() => queryAiNexus('traffic')} className="px-3 py-2 border border-[#D4AF37] text-[10px] font-mono hover:bg-[#D4AF37] hover:text-black transition-all">Scan Traffic Conduits</button>
-                  <button onClick={() => queryAiNexus('arbitrage')} className="px-3 py-2 border border-[#D4AF37] text-[10px] font-mono hover:bg-[#D4AF37] hover:text-black transition-all">Scan Asset Spread</button>
-                </div>
-              </div>
             </div>
           )}
 
           {/* TAB 2: NATIVE EMBEDDED VAULT */}
           {activeTab === 'vault' && (
             <div className="w-full h-full flex flex-col space-y-4">
-              <div className="flex justify-between items-center border-b border-[#D4AF37]/30 pb-2">
-                <span className="text-xs font-mono text-[#D4AF37]">SECURE SUB-FRAME INTERNAL ROUTE</span>
-              </div>
               <div className="flex-1 w-full min-h-[70vh] bg-black border-2 border-[#D4AF37] overflow-hidden relative">
                 <iframe 
                   src="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" 
@@ -144,9 +107,6 @@ export default function ArcMotherboard() {
           {/* TAB 3: NATIVE EMBEDDED CALCULATOR */}
           {activeTab === 'calculator' && (
             <div className="w-full h-full flex flex-col space-y-4">
-              <div className="flex justify-between items-center border-b border-[#D4AF37]/30 pb-2">
-                <span className="text-xs font-mono text-[#D4AF37]">MATHEMATICAL CONDUIT SUB-FRAME</span>
-              </div>
               <div className="flex-1 w-full min-h-[70vh] bg-black border-2 border-[#D4AF37] overflow-hidden relative">
                 <iframe 
                   src="https://arc-calculator-mg4krlwft-punitsaini252010-rgbs-projects.vercel.app/" 
@@ -161,7 +121,6 @@ export default function ArcMotherboard() {
             <div className="flex flex-col h-[75vh] bg-[#041510] border-2 border-[#D4AF37] p-4 relative">
               <div className="border-b border-[#D4AF37]/30 pb-3 mb-4 flex justify-between items-center">
                 <h2 className="text-lg font-black text-[#FFFDD0] tracking-wider">#OPERATOR-TRENCHES</h2>
-                <span className="text-[10px] font-mono block text-red-400">HIGH-SPEED FLUSH ENGINE ACTIVE</span>
               </div>
               <div className="flex-1 overflow-y-auto space-y-4 pr-2 font-mono text-xs">
                 {ghostMessages.map((msg) => (
@@ -175,34 +134,11 @@ export default function ArcMotherboard() {
                   </div>
                 ))}
               </div>
-              <div className="mt-4 pt-3 border-t border-[#D4AF37]/20">
-                <div className="bg-black/80 border border-dashed border-[#D4AF37] p-3 text-center">
-                  <p className="text-[11px] font-mono text-[#D4AF37] uppercase tracking-widest">
-                    ⚠️ CONNECT YOUR TELEMETRY DEVICE VIA DISCORD TO TALK LIVE
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* TAB 5: ANNOUNCEMENTS */}
-          {activeTab === 'announcements' && (
-            <div className="space-y-6">
-              <div className="border-b border-[#D4AF37]/30 pb-4">
-                <h2 className="text-2xl font-black text-[#FFFDD0] tracking-wider">GLOBAL ANNOUNCEMENTS</h2>
-              </div>
-              <div className="space-y-4">
-                <div className="bg-[#061F17] border border-[#D4AF37]/40 p-5">
-                  <span className="text-[10px] font-mono text-[#D4AF37] tracking-wider block mb-1">SYSTEM UPDATE</span>
-                  <h4 className="text-md font-bold text-[#FFFDD0] font-mono uppercase mb-2">MOTHERBOARD INITIALIZED</h4>
-                  <p className="text-xs text-gray-300 leading-relaxed">All external sub-pages, tracking engines, and calculator arrays have been successfully bound to the main digital matrix.</p>
-                </div>
-              </div>
             </div>
           )}
         </div>
       </main>
     </div>
   );
-                }
+            }
             
