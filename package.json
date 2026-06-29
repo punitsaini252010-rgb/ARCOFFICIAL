@@ -1,5 +1,5 @@
 {
-  "name": "arc",
+  "name": "arc-matrix",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -12,8 +12,8 @@
     "react": "latest",
     "react-dom": "latest",
     "tailwindcss": "latest",
+    "@tailwindcss/postcss": "latest",
     "postcss": "latest",
     "autoprefixer": "latest"
   }
 }
-
