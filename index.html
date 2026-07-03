@@ -6,127 +6,141 @@
   <title>ARC | Let's Make Money Together</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* The Exact Green Grid from your Screenshot */
+    /* TRW Ultimate Luxury Dark Theme */
     body {
-      background-color: #021c10;
-      background-image: 
-        linear-gradient(#032b18 1px, transparent 1px),
-        linear-gradient(90deg, #032b18 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-color: #050505;
+      background-image: radial-gradient(circle at 50% 0%, #0a2114 0%, #050505 70%);
       color: #e5e7eb;
       margin: 0;
-      overflow: hidden; /* Prevents double scrollbars */
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
     
-    /* Custom Luxury Scrollbar */
+    /* Cinematic Scrollbar */
     ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-track { background: #050505; }
     ::-webkit-scrollbar-thumb { background: #D4AF37; }
 
-    /* Hide elements cleanly */
-    .hidden-view { display: none !important; }
-    
-    /* Sleek iframe container */
-    .iframe-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
+    /* TRW Glass Card Effect */
+    .glass-card {
+      background: linear-gradient(145deg, rgba(15,15,15,0.9) 0%, rgba(5,5,5,0.9) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    .glass-card:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.15);
+    }
+
+    .hidden-view { display: none !important; }
   </style>
 </head>
-<body class="antialiased font-sans h-screen w-screen flex flex-col md:flex-row">
+<body class="h-screen w-screen flex flex-col md:flex-row overflow-hidden">
 
-  <aside class="w-full md:w-72 bg-[#011008]/95 backdrop-blur-xl border-b md:border-b-0 md:border-r border-[#D4AF37]/20 flex flex-col justify-between p-6 z-20 shadow-[5px_0_30px_rgba(0,0,0,0.8)]">
-    <div>
-      <div class="mb-10 text-center md:text-left">
-        <h1 class="text-5xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#FFFDD0] via-[#D4AF37] to-[#AA7C11] drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
-          ARC
-        </h1>
-        <p class="text-[10px] text-green-400 tracking-[0.2em] font-mono mt-2 font-bold">LET'S MAKE MONEY TOGETHER</p>
+  <aside class="w-full md:w-20 lg:w-64 bg-[#020202] border-b md:border-b-0 md:border-r border-[#D4AF37]/20 flex flex-col justify-between py-6 z-20 transition-all duration-300">
+    <div class="px-4 lg:px-6">
+      <div class="mb-8 text-center lg:text-left flex items-center justify-center lg:justify-start gap-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-[#D4AF37] to-[#AA7C11] flex items-center justify-center text-black font-black text-xl shadow-[0_0_15px_rgba(212,175,55,0.4)]">A</div>
+        <div class="hidden lg:block">
+          <h1 class="text-xl font-black tracking-widest text-[#FFFDD0]">ARC</h1>
+          <p class="text-[8px] text-green-500 tracking-[0.2em] font-mono mt-1 font-bold">LET'S MAKE MONEY</p>
+        </div>
       </div>
 
-      <nav class="space-y-2">
-        <button onclick="switchTab('home')" id="btn-home" class="tab-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 bg-[#D4AF37]/10 text-[#FFFDD0] border border-[#D4AF37]/50 shadow-[0_0_15px_rgba(212,175,55,0.15)]">
-          <span>⬛</span><span>THE MOTHERBOARD</span>
+      <nav class="space-y-4">
+        <button onclick="switchTab('home')" id="btn-home" class="w-full flex items-center justify-center lg:justify-start space-x-0 lg:space-x-4 p-3 rounded-lg text-[#D4AF37] bg-[#D4AF37]/10 border border-[#D4AF37]/30 transition-all group">
+          <span class="text-xl">⬛</span>
+          <span class="hidden lg:block font-bold text-xs tracking-widest uppercase">The Hub</span>
         </button>
-        <button onclick="switchTab('dashboard')" id="btn-dashboard" class="tab-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 bg-transparent text-gray-400 border border-transparent hover:bg-white/5 hover:text-white">
-          <span>⚡</span><span>ARC DASHBOARD</span>
-        </button>
-        <button onclick="switchTab('vault')" id="btn-vault" class="tab-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 bg-transparent text-gray-400 border border-transparent hover:bg-white/5 hover:text-white">
-          <span>🔱</span><span>BUSINESS MODELS</span>
-        </button>
-        <button onclick="switchTab('warroom')" id="btn-warroom" class="tab-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 bg-transparent text-gray-400 border border-transparent hover:bg-white/5 hover:text-white">
-          <span>👁️</span><span>THE WAR ROOM</span>
+
+        <a href="https://arc-calculator.vercel.app/" class="w-full flex items-center justify-center lg:justify-start space-x-0 lg:space-x-4 p-3 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all group">
+          <span class="text-xl group-hover:scale-110 transition-transform">⚡</span>
+          <span class="hidden lg:block font-bold text-xs tracking-widest uppercase">Dashboard</span>
+        </a>
+
+        <a href="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="w-full flex items-center justify-center lg:justify-start space-x-0 lg:space-x-4 p-3 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all group">
+          <span class="text-xl group-hover:scale-110 transition-transform">🔱</span>
+          <span class="hidden lg:block font-bold text-xs tracking-widest uppercase">Vault</span>
+        </a>
+
+        <button onclick="switchTab('warroom')" id="btn-warroom" class="w-full flex items-center justify-center lg:justify-start space-x-0 lg:space-x-4 p-3 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all group relative">
+          <span class="text-xl group-hover:scale-110 transition-transform">👁️</span>
+          <span class="hidden lg:block font-bold text-xs tracking-widest uppercase">War Room</span>
+          <div class="absolute top-2 right-2 lg:right-4 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
         </button>
       </nav>
     </div>
 
-    <div class="mt-8 pt-6 border-t border-[#D4AF37]/10 font-mono text-[10px] text-gray-500 space-y-2">
-      <div class="flex justify-between items-center">
-        <span>NETWORK:</span>
-        <span class="text-green-500 font-bold flex items-center gap-2"><div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div> SECURE</span>
-      </div>
-      <div class="flex justify-between">
-        <span>OPERATORS LIVE:</span>
-        <span class="text-[#D4AF37] font-bold">1,842</span>
+    <div class="px-4 lg:px-6 hidden md:block">
+      <div class="bg-[#0a0a0a] border border-[#D4AF37]/10 p-4 rounded-lg">
+        <p class="text-[10px] text-gray-500 font-mono mb-1">NETWORK STATUS</p>
+        <p class="text-xs text-green-500 font-bold tracking-widest flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></span> SECURE
+        </p>
       </div>
     </div>
   </aside>
 
-  <main class="flex-1 flex flex-col relative z-10 h-full w-full bg-transparent">
+  <main class="flex-1 relative z-10 h-full overflow-y-auto bg-transparent">
     
-    <div id="tab-home" class="tab-content w-full h-full overflow-y-auto p-6 md:p-12 flex flex-col justify-center items-center relative">
-      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#04331d]/40 rounded-full blur-[200px] -z-10"></div>
+    <div id="tab-home" class="tab-content p-6 md:p-12 max-w-7xl mx-auto min-h-full flex flex-col justify-center">
       
-      <div class="max-w-4xl w-full space-y-12 text-center md:text-left">
-        <div>
-          <h2 class="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-4 leading-tight">Escape the <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#AA7C11]">Illusion.</span></h2>
-          <p class="text-lg md:text-xl text-gray-400 font-mono max-w-2xl">The system was designed to drain your most valuable asset: Time. You trade 40 hours a week for a fraction of what you produce.</p>
-        </div>
+      <div class="mb-12 text-center md:text-left">
+        <h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-4">Escape the <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#AA7C11]">Matrix.</span></h2>
+        <p class="text-lg text-gray-400 max-w-2xl">Select your conduit. Execution is the only metric that matters.</p>
+      </div>
 
-        <div class="space-y-6 border-l-2 border-[#D4AF37] pl-8 py-2">
-          <p class="text-lg md:text-xl text-gray-300 font-bold tracking-wide italic">"Volume negates luck. Speed kills the competition."</p>
-          <p class="text-lg md:text-xl text-gray-300 font-bold tracking-wide italic">"If your income is tied to your physical presence, you own a high-stress job, not a business."</p>
-          <p class="text-xl md:text-2xl text-[#D4AF37] font-black tracking-widest uppercase mt-4">Your reality awakens now.</p>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <a href="https://arc-calculator.vercel.app/" class="glass-card block p-8 rounded-2xl cursor-pointer group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl group-hover:bg-[#D4AF37]/20 transition-all"></div>
+          <span class="text-4xl mb-4 block">⚡</span>
+          <h3 class="text-2xl font-black text-white uppercase tracking-widest mb-2">Dashboard</h3>
+          <p class="text-sm text-gray-400">Access the financial conduits and tracking engines.</p>
+          <div class="mt-6 flex items-center text-[#D4AF37] font-bold text-xs tracking-widest uppercase">
+            Initialize <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+          </div>
+        </a>
 
-        <div class="flex flex-wrap gap-4 pt-8">
-          <button onclick="switchTab('dashboard')" class="bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-black uppercase tracking-widest px-10 py-5 hover:opacity-90 transition-all text-sm shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-            Launch Dashboard
-          </button>
-          <button onclick="switchTab('vault')" class="border border-[#D4AF37]/50 text-[#D4AF37] font-black uppercase tracking-widest px-10 py-5 hover:bg-[#D4AF37]/5 transition-all text-sm backdrop-blur-sm">
-            Open The Vault
-          </button>
-        </div>
+        <a href="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="glass-card block p-8 rounded-2xl cursor-pointer group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl group-hover:bg-[#D4AF37]/20 transition-all"></div>
+          <span class="text-4xl mb-4 block">🔱</span>
+          <h3 class="text-2xl font-black text-white uppercase tracking-widest mb-2">The Vault</h3>
+          <p class="text-sm text-gray-400">Unlock the 30 protocols and business models.</p>
+          <div class="mt-6 flex items-center text-[#D4AF37] font-bold text-xs tracking-widest uppercase">
+            Unlock <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+          </div>
+        </a>
+
+        <button onclick="switchTab('warroom')" class="glass-card text-left w-full block p-8 rounded-2xl cursor-pointer group relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-2xl group-hover:bg-red-500/20 transition-all"></div>
+          <span class="text-4xl mb-4 block">👁️</span>
+          <h3 class="text-2xl font-black text-white uppercase tracking-widest mb-2">War Room</h3>
+          <p class="text-sm text-gray-400">Live network of operators. Share wins, get alpha.</p>
+          <div class="mt-6 flex items-center text-red-400 font-bold text-xs tracking-widest uppercase">
+            Enter Trenches <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+          </div>
+        </button>
+
       </div>
     </div>
 
-    <div id="tab-dashboard" class="tab-content hidden-view w-full h-full relative">
-      <iframe src="https://arc-calculator.vercel.app/" class="iframe-wrapper"></iframe>
-    </div>
-
-    <div id="tab-vault" class="tab-content hidden-view w-full h-full relative">
-      <iframe src="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="iframe-wrapper"></iframe>
-    </div>
-
-    <div id="tab-warroom" class="tab-content hidden-view flex flex-col h-full bg-[#010a05]/90 backdrop-blur-md">
-      <div class="border-b border-[#D4AF37]/20 pb-3 p-6 bg-black/40 shadow-md z-10 flex justify-between items-center">
+    <div id="tab-warroom" class="tab-content hidden-view flex flex-col h-full w-full">
+      <div class="border-b border-[#D4AF37]/20 p-6 bg-[#030303]/90 backdrop-blur-lg flex justify-between items-center sticky top-0 z-10 shadow-xl">
         <div>
-          <h2 class="text-xl md:text-2xl font-black text-[#FFFDD0] tracking-widest uppercase drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">#Operator-Trenches</h2>
-          <p class="text-[10px] text-green-500 font-mono mt-1 tracking-widest">● LIVE NETWORK | PURGING IN 04:12:59</p>
+          <h2 class="text-xl md:text-2xl font-black text-white tracking-widest uppercase">#War-Room</h2>
+          <p class="text-[10px] text-green-500 font-mono mt-1 tracking-widest">● LIVE | CHAT REFRESHES IN 24H</p>
         </div>
       </div>
 
-      <div id="chat-feed" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-5 font-mono">
+      <div id="chat-feed" class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 font-mono bg-[#050505]">
         </div>
 
-      <div class="p-4 md:p-6 bg-black/60 border-t border-[#D4AF37]/20">
-        <form id="chat-form" class="flex space-x-3">
-          <input type="text" id="chat-input" autocomplete="off" placeholder="Drop alpha here..." class="flex-1 bg-[#01140b] border border-[#D4AF37]/30 text-white font-mono text-sm p-4 rounded-md focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" required>
-          <button type="submit" class="bg-[#D4AF37] text-black font-black uppercase tracking-widest px-8 rounded-md hover:bg-white transition-all text-sm shadow-[0_0_15px_rgba(212,175,55,0.3)]">SEND</button>
+      <div class="p-4 md:p-6 bg-[#030303] border-t border-[#D4AF37]/20">
+        <form id="chat-form" class="flex space-x-3 max-w-5xl mx-auto">
+          <input type="text" id="chat-input" autocomplete="off" placeholder="Message the operators..." class="flex-1 bg-[#0a0a0a] border border-[#D4AF37]/30 text-white font-mono text-sm p-4 rounded-xl focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all shadow-inner" required>
+          <button type="submit" class="bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-black uppercase tracking-widest px-8 rounded-xl hover:opacity-90 transition-all text-sm shadow-[0_0_15px_rgba(212,175,55,0.2)]">SEND</button>
         </form>
       </div>
     </div>
@@ -134,25 +148,27 @@
   </main>
 
   <script>
-    // Seamless Tab Switching
+    // Seamless Nav Logic
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden-view'));
       document.getElementById('tab-' + tabId).classList.remove('hidden-view');
       
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.className = "tab-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 bg-transparent text-gray-400 border border-transparent hover:bg-white/5 hover:text-white";
-      });
+      // Update sidebar styling
+      document.getElementById('btn-home').className = "w-full flex items-center justify-center lg:justify-start space-x-0 lg:space-x-4 p-3 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all group";
+      document.getElementById('btn-warroom').className = "w-full flex items-center justify-center lg:justify-start space-x-0 lg:space-x-4 p-3 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-all group relative";
       
-      document.getElementById('btn-' + tabId).className = "tab-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 bg-[#D4AF37]/10 text-[#FFFDD0] border border-[#D4AF37]/50 shadow-[0_0_15px_rgba(212,175,55,0.15)]";
+      if(tabId === 'home') {
+        document.getElementById('btn-home').className = "w-full flex items-center justify-center lg:justify-start space-x-0 lg:space-x-4 p-3 rounded-lg text-[#D4AF37] bg-[#D4AF37]/10 border border-[#D4AF37]/30 transition-all group";
+      } else if (tabId === 'warroom') {
+        document.getElementById('btn-warroom').className = "w-full flex items-center justify-center lg:justify-start space-x-0 lg:space-x-4 p-3 rounded-lg text-[#D4AF37] bg-[#D4AF37]/10 border border-[#D4AF37]/30 transition-all group relative";
+      }
     }
 
-    // --- SMART WAR ROOM ENGINE ---
-
+    // --- SMART WAR ROOM ENGINE (TRW STYLE) ---
     const chatFeed = document.getElementById('chat-feed');
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById('chat-input');
 
-    // Human-like Operator Profiles
     const bots = [
       { name: 'Marcus_Ecom', role: 'WHALE', color: 'text-red-500' },
       { name: 'David_Alpha', role: 'ELITE', color: 'text-[#D4AF37]' },
@@ -161,29 +177,27 @@
       { name: 'Sinner_00', role: 'WHALE', color: 'text-red-500' }
     ];
 
-    // Ultra-Realistic Initial Chat History
     const initialHistory = [
-      { bot: bots[0], time: "11:42 AM", text: "Bro I just ran the phase 1 protocol... wtf was I doing with my life before this." },
-      { bot: bots[2], time: "11:45 AM", text: "fr shit is eye opening. dashboard tools are carrying me rn tbh." },
-      { bot: bots[1], time: "11:59 AM", text: "First $800 day using the arbitrage setup. Proof below don't sleep on this shit." + 
-        "<div class='mt-3 border border-green-500/40 p-3 bg-green-500/10 text-green-400 text-[10px] w-fit rounded shadow-[0_0_10px_rgba(34,197,94,0.1)] flex items-center gap-2'><span>💰</span>[STRIPE_PAYMENT_SUCCESS: +$842.80]</div>" },
-      { bot: bots[3], time: "12:02 PM", text: "Fuck yeah bro 🔥 keep scaling. don't get lazy now." },
-      { bot: bots[4], time: "12:05 PM", text: "Who here is combining organic funnels with the new UI? Need to bounce an idea." }
+      { bot: bots[0], time: "11:42 AM", text: "bro wtf... phase 1 protocol just clicked for me. entirely different mindset." },
+      { bot: bots[2], time: "11:45 AM", text: "fr shit is eye opening. speed kills the competition." },
+      { bot: bots[1], time: "11:59 AM", text: "First $800 day using the arbitrage setup. Don't sleep on this shit." + 
+        "<div class='mt-3 border border-green-500/40 p-3 bg-green-500/10 text-green-400 text-xs w-fit rounded-lg shadow-[0_0_10px_rgba(34,197,94,0.1)] flex items-center gap-2'><span>💰</span>[STRIPE: +$842.80 CLEARED]</div>" },
+      { bot: bots[3], time: "12:02 PM", text: "fuck yeah bro 🔥 scale that shit immediately." },
+      { bot: bots[4], time: "12:05 PM", text: "who here is running traffic for the dashboard? need to bounce an idea." }
     ];
 
     function createMessageHTML(name, role, roleColor, time, text, isUser = false) {
-      const bg = isUser ? 'bg-[#D4AF37]/5 border-r-2 border-[#D4AF37]' : 'bg-black/40 border-l-2 border-[#D4AF37]';
-      const align = isUser ? 'ml-auto text-right' : 'mr-auto text-left';
-      const flexDir = isUser ? 'flex-row-reverse space-x-reverse' : 'flex-row';
+      const bg = isUser ? 'bg-gradient-to-r from-[#1a1505] to-[#2a220a] border border-[#D4AF37]/30' : 'bg-[#0a0a0a] border border-gray-800';
+      const align = isUser ? 'ml-auto' : 'mr-auto';
       
       return `
-        <div class="p-4 ${bg} space-y-2 mb-3 max-w-[90%] md:max-w-[75%] rounded-sm shadow-sm ${align}">
-          <div class="flex items-center space-x-2 ${flexDir} text-[10px]">
-            <span class="${isUser ? 'text-[#D4AF37]' : 'text-[#FFFDD0]'} font-black text-xs">${name}</span>
-            <span class="bg-[#021c10] ${roleColor} px-1.5 py-0.5 border border-gray-700/50 uppercase font-bold tracking-widest rounded-sm">${role}</span>
-            <span class="text-gray-500 ml-auto">${time}</span>
+        <div class="p-5 ${bg} space-y-3 max-w-[90%] md:max-w-[70%] rounded-2xl shadow-xl ${align}">
+          <div class="flex items-center space-x-3 text-[10px] border-b ${isUser ? 'border-[#D4AF37]/20' : 'border-gray-800'} pb-2">
+            <span class="${isUser ? 'text-[#D4AF37]' : 'text-white'} font-black text-sm tracking-wider">${name}</span>
+            <span class="bg-[#050505] ${roleColor} px-2 py-1 uppercase font-black tracking-widest rounded-md">${role}</span>
+            <span class="text-gray-600 font-bold ml-auto">${time}</span>
           </div>
-          <p class="text-gray-300 text-xs md:text-sm leading-relaxed">${text}</p>
+          <p class="text-gray-300 text-sm md:text-base leading-relaxed tracking-wide">${text}</p>
         </div>
       `;
     }
@@ -198,74 +212,49 @@
       return hours + ':' + minutes + ' ' + ampm;
     }
 
-    // Inject history
     initialHistory.forEach(msg => {
       chatFeed.innerHTML += createMessageHTML(msg.bot.name, msg.bot.role, msg.bot.color, msg.time, msg.text);
     });
     chatFeed.scrollTop = chatFeed.scrollHeight;
 
-    // Smart Bot Brain Logic
     function getSmartReply(userText) {
       const txt = userText.toLowerCase();
       let pool = [];
 
-      if (txt.includes('?') || txt.includes('how') || txt.includes('what') || txt.includes('help')) {
+      if (txt.includes('?') || txt.includes('how') || txt.includes('help')) {
         pool = [
-          "bro just check the vault, it's literally all in there.",
-          "wdym? just follow protocol 2.",
-          "don't overthink this shit. just execute.",
-          "read the pinned msgs in the dashboard first fr.",
-          "literally just watch the models page and copy it."
+          "bro check the vault. everything is literally mapped out in there.",
+          "wdym? just hit the dashboard link and follow the steps.",
+          "don't overcomplicate it. just execute.",
+          "read the pinned msgs in the vault fr."
         ];
-      } else if (txt.includes('money') || txt.includes('profit') || txt.includes('$') || txt.includes('made') || txt.includes('win')) {
+      } else if (txt.includes('money') || txt.includes('profit') || txt.includes('$') || txt.includes('win')) {
         pool = [
           "fuck yeah bro. scale it.",
           "print that shit 💸",
-          "huge W. keep pushing don't stop.",
-          "insane bro. literally free money if you follow the system.",
+          "huge W. keep pushing bro.",
           "cash out some, reinvest the rest. let's go."
         ];
       } else if (txt.includes('yo') || txt.includes('hi') || txt.includes('sup') || txt.includes('hello')) {
-        pool = [
-          "yo",
-          "sup bro",
-          "who else is grinding rn?",
-          "yo. get to work.",
-          "sup man, volume up."
-        ];
-      } else if (txt.includes('shit') || txt.includes('fuck') || txt.includes('damn') || txt.includes('crazy')) {
-        pool = [
-          "lol I know right.",
-          "shit is genuinely insane tbh.",
-          "fucking crazy. they don't want us to know this.",
-          "fr bro."
-        ];
+        pool = ["yo", "sup bro", "who else is grinding rn?", "yo. get to work."];
+      } else if (txt.includes('shit') || txt.includes('fuck') || txt.includes('damn')) {
+        pool = ["lol I know right.", "shit is genuinely insane tbh.", "fucking crazy.", "fr bro."];
       } else {
-        pool = [
-          "fr bro.",
-          "100%.",
-          "just keep running the volume.",
-          "bet.",
-          "facts. speed kills."
-        ];
+        pool = ["fr.", "100%.", "just keep running the volume.", "bet.", "facts. speed kills."];
       }
       return pool[Math.floor(Math.random() * pool.length)];
     }
 
-    // Handle User Chat
     chatForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const userText = chatInput.value.trim();
       if (!userText) return;
 
-      // Drop user message
       chatFeed.innerHTML += createMessageHTML('YOU', 'INITIATE', 'text-blue-400', getCurrentTime(), userText, true);
       chatInput.value = '';
       chatFeed.scrollTop = chatFeed.scrollHeight;
 
-      // Bot reads and replies fast (1 to 2.5 seconds)
       const thinkingTime = Math.floor(Math.random() * 1500) + 1000; 
-      
       setTimeout(() => {
         const randomBot = bots[Math.floor(Math.random() * bots.length)];
         const replyText = getSmartReply(userText);
@@ -274,7 +263,6 @@
         chatFeed.scrollTop = chatFeed.scrollHeight;
       }, thinkingTime);
     });
-
   </script>
 </body>
 </html>
