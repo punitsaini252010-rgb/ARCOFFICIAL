@@ -3,221 +3,313 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARC MATRIX | Oasis Command</title>
+  <title>ARC MATRIX | The Complete Ecosystem</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* THE MASTER ARC THEME */
+    /* Full Page Scrollable Background Grid */
     body {
       background-color: #021c10;
       background-image: 
         linear-gradient(#032b18 1px, transparent 1px),
         linear-gradient(90deg, #032b18 1px, transparent 1px);
       background-size: 60px 60px;
+      background-attachment: fixed; /* Keeps grid static while scrolling */
       color: #e5e7eb;
       margin: 0;
-      overflow: hidden; /* Locks the app frame */
+      scroll-behavior: smooth;
     }
     
     /* Luxury Scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #D4AF37; }
+    ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
 
     /* Web App State Classes */
-    .app-view { display: none; height: 100%; width: 100%; position: relative; }
+    .app-view { display: none; width: 100%; min-h-screen; animation: fadeIn 0.4s ease-in-out; }
     .app-view.active { display: block; }
     
-    /* Seamless Iframe Container */
-    .app-frame { width: 100%; height: 100%; border: none; position: absolute; inset: 0; background-color: #010a05; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Seamless Iframes */
+    .app-frame { width: 100%; height: 1200px; border: none; background-color: transparent; }
+    
+    /* Interactive Toggles */
+    .toggle-checkbox:checked { right: 0; border-color: #D4AF37; }
+    .toggle-checkbox:checked + .toggle-label { background-color: #D4AF37; }
   </style>
 </head>
-<body class="antialiased font-sans h-screen w-screen flex flex-col md:flex-row border-4 border-[#D4AF37]">
+<body class="antialiased font-sans border-t-4 border-[#D4AF37]">
 
-  <aside class="w-full md:w-80 bg-[#01140b]/95 backdrop-blur-md border-b md:border-b-0 md:border-r border-[#D4AF37] flex flex-col justify-between p-6 z-20">
-    <div>
-      <div class="mb-10 text-center md:text-left">
-        <h1 class="text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#FFFDD0] via-[#D4AF37] to-[#AA7C11] drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]">
-          ARC
-        </h1>
-        <p class="text-[11px] text-green-400 tracking-[0.4em] font-mono mt-1 uppercase font-bold">OASIS COMMAND v1.0</p>
-      </div>
-
-      <nav class="space-y-3">
-        <button onclick="switchView('home')" id="btn-home" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-none font-mono text-xs tracking-wider transition-all duration-300 border bg-[#D4AF37]/10 text-[#FFFDD0] border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.2)]">
-          <span>⬛</span><span>MOTHERBOARD</span>
-        </button>
-        <button onclick="switchView('dashboard')" id="btn-dashboard" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-none font-mono text-xs tracking-wider transition-all duration-300 border bg-transparent text-gray-400 border-transparent hover:border-[#D4AF37]/40 hover:text-white">
-          <span>⚡</span><span>ARC DASHBOARD</span>
-        </button>
-        <button onclick="switchView('vault')" id="btn-vault" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-none font-mono text-xs tracking-wider transition-all duration-300 border bg-transparent text-gray-400 border-transparent hover:border-[#D4AF37]/40 hover:text-white">
-          <span>🔱</span><span>THE VAULT</span>
-        </button>
-        <button onclick="switchView('warroom')" id="btn-warroom" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-none font-mono text-xs tracking-wider transition-all duration-300 border bg-transparent text-gray-400 border-transparent hover:border-[#D4AF37]/40 hover:text-white relative">
-          <span>👁️</span><span>WAR ROOM</span>
-          <div class="absolute top-3 right-3 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-        </button>
-      </nav>
-    </div>
-
-    <div class="mt-8 pt-6 border-t border-[#D4AF37]/20 font-mono text-[11px] text-gray-400 space-y-2">
-      <div class="flex justify-between items-center">
-        <span>BATTLEZONE STATUS:</span>
-        <span class="text-green-500 font-bold tracking-widest flex items-center gap-2"><div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></div> LIVE</span>
-      </div>
-      <div class="flex justify-between">
-        <span>ACTIVE CONDUITS:</span>
-        <span class="text-[#D4AF37] font-bold">1,842</span>
-      </div>
-    </div>
-  </aside>
-
-  <main class="flex-1 relative z-10 h-full w-full bg-transparent overflow-hidden">
+  <div class="flex flex-col md:flex-row min-h-screen">
     
-    <div id="view-home" class="app-view active overflow-y-auto p-6 md:p-12 flex flex-col justify-center items-center relative h-full">
-      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#04331d] rounded-full blur-[150px] -z-10"></div>
-      
-      <div class="max-w-4xl w-full space-y-10 text-center md:text-left">
-        <div>
-          <h2 class="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-4">Command <span class="text-[#D4AF37]">Center.</span></h2>
-          <p class="text-lg text-gray-400 font-mono">All operational protocols and financial conduits are routed through this terminal.</p>
+    <aside class="w-full md:w-72 bg-[#01140b]/95 backdrop-blur-xl md:border-r border-b border-[#D4AF37]/30 flex flex-col justify-between md:sticky md:top-0 md:h-screen overflow-y-auto shadow-[10px_0_30px_rgba(0,0,0,0.8)] z-50">
+      <div class="p-6">
+        <div class="mb-10 text-center md:text-left">
+          <h1 class="text-5xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#FFFDD0] via-[#D4AF37] to-[#AA7C11] drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]">
+            ARC
+          </h1>
+          <p class="text-[10px] text-green-400 tracking-[0.3em] font-mono mt-2 uppercase font-bold">ECOSYSTEM v2.0</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-          <div class="bg-[#01140b] border border-[#D4AF37]/50 p-6 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
-            <h3 class="text-xs font-mono text-[#D4AF37] uppercase tracking-widest">System Engine</h3>
-            <p class="text-2xl font-black text-white mt-2">DASHBOARD</p>
-            <button onclick="switchView('dashboard')" class="text-[10px] text-[#FFFDD0] underline mt-4 block font-mono">INITIALIZE →</button>
+        <nav class="space-y-2">
+          <button onclick="switchView('home')" id="btn-home" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border bg-[#D4AF37]/10 text-[#FFFDD0] border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+            <span class="text-lg">⬛</span><span>THE HUB</span>
+          </button>
+          <button onclick="switchView('dashboard')" id="btn-dashboard" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-transparent text-gray-400 hover:text-white hover:bg-white/5">
+            <span class="text-lg">⚡</span><span>DASHBOARD</span>
+          </button>
+          <button onclick="switchView('vault')" id="btn-vault" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-transparent text-gray-400 hover:text-white hover:bg-white/5">
+            <span class="text-lg">🔱</span><span>THE VAULT</span>
+          </button>
+          <button onclick="switchView('warroom')" id="btn-warroom" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-transparent text-gray-400 hover:text-white hover:bg-white/5 relative">
+            <span class="text-lg">👁️</span><span>WAR ROOM</span>
+            <div class="absolute top-3 right-3 w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+          </button>
+          
+          <div class="py-2"><div class="border-t border-[#D4AF37]/10"></div></div>
+          
+          <button onclick="switchView('leaderboard')" id="btn-leaderboard" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-transparent text-gray-400 hover:text-white hover:bg-white/5">
+            <span class="text-lg">🏆</span><span>LEADERBOARD</span>
+          </button>
+          <button onclick="switchView('announcements')" id="btn-announcements" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-transparent text-gray-400 hover:text-white hover:bg-white/5">
+            <span class="text-lg">📢</span><span>INTEL FEED</span>
+          </button>
+          <button onclick="switchView('settings')" id="btn-settings" class="nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-md font-mono text-xs tracking-wider transition-all duration-300 border border-transparent text-gray-400 hover:text-white hover:bg-white/5">
+            <span class="text-lg">⚙️</span><span>ROUTING / API</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="p-6 mt-auto">
+        <div class="bg-[#050505] border border-[#D4AF37]/20 p-4 rounded-md">
+          <div class="flex justify-between items-center text-[10px] font-mono text-gray-400 mb-2">
+            <span>DELTA EXCHANGE:</span>
+            <span class="text-green-500 font-bold">CONNECTED</span>
           </div>
-          <div class="bg-[#01140b] border border-[#D4AF37]/50 p-6 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
-            <h3 class="text-xs font-mono text-[#D4AF37] uppercase tracking-widest">Protocol Matrix</h3>
-            <p class="text-2xl font-black text-white mt-2">THE VAULT</p>
-            <button onclick="switchView('vault')" class="text-[10px] text-[#FFFDD0] underline mt-4 block font-mono">UNLOCK →</button>
+          <div class="flex justify-between items-center text-[10px] font-mono text-gray-400 mb-2">
+            <span>GUMROAD WEBHOOK:</span>
+            <span class="text-green-500 font-bold">ACTIVE</span>
           </div>
-          <div class="bg-[#01140b] border border-[#D4AF37]/50 p-6 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
-            <h3 class="text-xs font-mono text-[#D4AF37] uppercase tracking-widest">Live Operators</h3>
-            <p class="text-2xl font-black text-green-400 mt-2">WAR ROOM</p>
-            <button onclick="switchView('warroom')" class="text-[10px] text-[#FFFDD0] underline mt-4 block font-mono">ENTER TRENCHES →</button>
+          <div class="flex justify-between items-center text-[10px] font-mono text-gray-400">
+            <span>NETWORK OPERATORS:</span>
+            <span class="text-[#D4AF37] font-bold">2,104</span>
           </div>
         </div>
       </div>
-    </div>
+    </aside>
 
-    <div id="view-dashboard" class="app-view">
-      <iframe src="https://arc-calculator.vercel.app/" class="app-frame"></iframe>
-    </div>
-
-    <div id="view-vault" class="app-view">
-      <iframe src="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="app-frame"></iframe>
-    </div>
-
-    <div id="view-warroom" class="app-view bg-[#011008] flex flex-col h-full">
-      <div class="border-b border-[#D4AF37]/30 p-4 bg-[#01140b] shadow-lg flex justify-between items-center z-10">
-        <div>
-          <h2 class="text-xl font-black text-[#FFFDD0] tracking-widest uppercase">#Operator-Trenches</h2>
-        </div>
-      </div>
-
-      <div id="chat-feed" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 font-mono pb-20">
-        </div>
-
-      <div class="absolute bottom-0 w-full p-4 bg-[#01140b]/95 backdrop-blur-md border-t border-[#D4AF37]/30">
-        <form id="chat-form" class="flex space-x-2 max-w-4xl mx-auto">
-          <input type="text" id="chat-input" autocomplete="off" placeholder="Drop intelligence here..." class="flex-1 bg-[#021c10] border border-[#D4AF37]/50 text-white font-mono text-sm p-3 focus:outline-none focus:border-[#D4AF37] transition-all" required>
-          <button type="submit" class="bg-[#D4AF37] text-black font-black uppercase tracking-widest px-6 hover:bg-white transition-all text-xs">SEND</button>
-        </form>
-      </div>
-    </div>
-
-  </main>
-
-  <script>
-    // 1. SPA ROUTING ENGINE (Instant View Switching)
-    function switchView(viewId) {
-      // Hide all views
-      document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active'));
-      // Show targeted view instantly
-      document.getElementById('view-' + viewId).classList.add('active');
+    <main class="flex-1 w-full bg-transparent">
       
-      // Reset navigation styles
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.className = "nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-none font-mono text-xs tracking-wider transition-all duration-300 border bg-transparent text-gray-400 border-transparent hover:border-[#D4AF37]/40 hover:text-white";
-      });
-      
-      // Highlight active navigation
-      document.getElementById('btn-' + viewId).className = "nav-btn w-full flex items-center space-x-4 px-4 py-3 rounded-none font-mono text-xs tracking-wider transition-all duration-300 border bg-[#D4AF37]/10 text-[#FFFDD0] border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.2)]";
-    }
-
-    // 2. WAR ROOM AI BOT ENGINE
-    const chatFeed = document.getElementById('chat-feed');
-    const chatForm = document.getElementById('chat-form');
-    const chatInput = document.getElementById('chat-input');
-
-    const bots = [
-      { name: 'Marcus_Ecom', role: 'WHALE', color: 'text-red-400' },
-      { name: 'David_Alpha', role: 'ELITE', color: 'text-[#D4AF37]' },
-      { name: 'Ghost_Protocol', role: 'OPERATOR', color: 'text-gray-300' },
-      { name: 'X_Arbitrage', role: 'ELITE', color: 'text-[#D4AF37]' }
-    ];
-
-    const initialHistory = [
-      { bot: bots[0], time: "11:42 AM", text: "bro wtf... phase 1 protocol just clicked for me. insane." },
-      { bot: bots[2], time: "11:45 AM", text: "fr shit is crazy. speed kills the competition. just executed." },
-      { bot: bots[1], time: "11:59 AM", text: "first $800 day using the UI dashboard tools." + 
-        "<div class='mt-2 border border-green-500/40 p-2 bg-green-500/10 text-green-400 text-[10px] w-fit rounded'>[STRIPE: +$842.80 CLEARED]</div>" },
-      { bot: bots[3], time: "12:02 PM", text: "fuck yeah bro 🔥 keep printing." }
-    ];
-
-    function createMessage(name, role, roleColor, time, text, isUser = false) {
-      const bg = isUser ? 'bg-[#D4AF37]/10 border-r-2 border-[#D4AF37]' : 'bg-[#01140b]/80 border-l-2 border-[#D4AF37]';
-      const align = isUser ? 'ml-auto text-right' : 'mr-auto text-left';
-      const flexDir = isUser ? 'flex-row-reverse space-x-reverse' : 'flex-row';
-      
-      return `
-        <div class="p-3 ${bg} space-y-1 mb-2 max-w-[85%] ${align}">
-          <div class="flex items-center space-x-2 ${flexDir} text-[10px]">
-            <span class="${isUser ? 'text-[#D4AF37]' : 'text-[#FFFDD0]'} font-black">${name}</span>
-            <span class="bg-[#021c10] ${roleColor} px-1 border border-gray-700 uppercase font-bold">${role}</span>
-            <span class="text-gray-500">${time}</span>
+      <div id="view-home" class="app-view active p-6 md:p-12 lg:p-20">
+        <div class="max-w-6xl mx-auto space-y-12">
+          
+          <div class="border-l-4 border-[#D4AF37] pl-6 md:pl-10 py-2">
+            <h2 class="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter mb-4 leading-tight">Welcome to the <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#AA7C11]">1 Percent.</span></h2>
+            <p class="text-lg text-gray-400 font-mono max-w-2xl mt-6">This is not a course. This is an operating system. You are looking at the exact infrastructure used to extract liquidity from the markets.</p>
           </div>
-          <p class="text-gray-300 text-xs leading-relaxed mt-1">${text}</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
+            <div onclick="switchView('dashboard')" class="bg-gradient-to-br from-[#01140b] to-[#022413] border border-[#D4AF37]/40 p-8 rounded-xl cursor-pointer hover:border-[#D4AF37] hover:transform hover:-translate-y-2 transition-all shadow-xl group">
+              <span class="text-4xl mb-4 block">⚡</span>
+              <h3 class="text-2xl font-black text-white uppercase tracking-widest mb-2">Initialize Engines</h3>
+              <p class="text-sm text-gray-400">Launch the calculators and track asset routing.</p>
+              <div class="mt-8 text-[#D4AF37] font-black text-xs uppercase tracking-widest flex items-center">Open Dashboard <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span></div>
+            </div>
+            
+            <div onclick="switchView('vault')" class="bg-gradient-to-br from-[#01140b] to-[#022413] border border-[#D4AF37]/40 p-8 rounded-xl cursor-pointer hover:border-[#D4AF37] hover:transform hover:-translate-y-2 transition-all shadow-xl group">
+              <span class="text-4xl mb-4 block">🔱</span>
+              <h3 class="text-2xl font-black text-white uppercase tracking-widest mb-2">The Vault</h3>
+              <p class="text-sm text-gray-400">Unlock the exact business models and protocols.</p>
+              <div class="mt-8 text-[#D4AF37] font-black text-xs uppercase tracking-widest flex items-center">Enter Vault <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span></div>
+            </div>
+
+            <div onclick="switchView('warroom')" class="bg-gradient-to-br from-[#01140b] to-[#022413] border border-red-900/40 p-8 rounded-xl cursor-pointer hover:border-red-500 hover:transform hover:-translate-y-2 transition-all shadow-xl group">
+              <span class="text-4xl mb-4 block">👁️</span>
+              <h3 class="text-2xl font-black text-white uppercase tracking-widest mb-2">War Room</h3>
+              <p class="text-sm text-gray-400">Live operator network. Share intel and scale.</p>
+              <div class="mt-8 text-red-500 font-black text-xs uppercase tracking-widest flex items-center">Join Network <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span></div>
+            </div>
+          </div>
+
+          <div class="bg-black/40 border border-[#D4AF37]/20 p-8 rounded-xl mt-12">
+            <h3 class="text-xl font-black text-[#FFFDD0] uppercase tracking-widest mb-6 border-b border-[#D4AF37]/20 pb-4">Live Market Intel</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-sm">
+              <div class="p-4 bg-[#01140b] border border-gray-800 rounded-md">
+                <span class="text-gray-500 text-xs block mb-1">AIOTUSD.P (Delta)</span>
+                <span class="text-red-400 font-bold">SHORT ACTIVE</span>
+              </div>
+              <div class="p-4 bg-[#01140b] border border-gray-800 rounded-md">
+                <span class="text-gray-500 text-xs block mb-1">Pi Network</span>
+                <span class="text-[#D4AF37] font-bold">MIGRATION PENDING</span>
+              </div>
+              <div class="p-4 bg-[#01140b] border border-gray-800 rounded-md">
+                <span class="text-gray-500 text-xs block mb-1">Gumroad Payouts</span>
+                <span class="text-green-400 font-bold">AXIS CLEARED</span>
+              </div>
+              <div class="p-4 bg-[#01140b] border border-gray-800 rounded-md">
+                <span class="text-gray-500 text-xs block mb-1">Phase 2 Target</span>
+                <span class="text-white font-bold">$10,000 / MO</span>
+              </div>
+            </div>
+          </div>
         </div>
-      `;
-    }
+      </div>
 
-    function getTime() {
-      const d = new Date();
-      return (d.getHours()%12||12) + ':' + (d.getMinutes()<10?'0':'') + d.getMinutes() + (d.getHours()>=12?' PM':' AM');
-    }
+      <div id="view-dashboard" class="app-view">
+        <div class="w-full h-full min-h-[1200px] p-4 md:p-8">
+          <div class="bg-[#011008] border border-[#D4AF37]/30 rounded-xl overflow-hidden shadow-2xl h-[1200px]">
+            <iframe src="https://arc-calculator.vercel.app/" class="app-frame"></iframe>
+          </div>
+        </div>
+      </div>
 
-    initialHistory.forEach(msg => {
-      chatFeed.innerHTML += createMessage(msg.bot.name, msg.bot.role, msg.bot.color, msg.time, msg.text);
-    });
-    chatFeed.scrollTop = chatFeed.scrollHeight;
+      <div id="view-vault" class="app-view">
+        <div class="w-full h-full min-h-[1200px] p-4 md:p-8">
+          <div class="bg-[#011008] border border-[#D4AF37]/30 rounded-xl overflow-hidden shadow-2xl h-[1200px]">
+            <iframe src="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="app-frame"></iframe>
+          </div>
+        </div>
+      </div>
 
-    function botReply(userTxt) {
-      const t = userTxt.toLowerCase();
-      if(t.includes('how') || t.includes('help') || t.includes('?')) return "bro check the vault tab. it's all mapped out in there.";
-      if(t.includes('money') || t.includes('$') || t.includes('win')) return "fuck yeah. scale that shit up 💸";
-      if(t.includes('yo') || t.includes('hi')) return "sup bro. volume up.";
-      if(t.includes('fuck') || t.includes('shit')) return "lol fr bro. insane.";
-      return "facts. don't overthink it just execute.";
-    }
+      <div id="view-warroom" class="app-view p-4 md:p-8">
+        <div class="max-w-5xl mx-auto bg-[#010a05]/90 backdrop-blur-xl border border-[#D4AF37]/30 rounded-xl overflow-hidden shadow-2xl flex flex-col h-[85vh]">
+          <div class="border-b border-[#D4AF37]/30 p-6 bg-[#01140b] flex justify-between items-center z-10">
+            <div>
+              <h2 class="text-2xl font-black text-[#FFFDD0] tracking-widest uppercase">#Operator-Trenches</h2>
+              <p class="text-xs text-green-500 font-mono mt-1">● NETWORK LIVE | END-TO-END ENCRYPTED</p>
+            </div>
+          </div>
+          
+          <div id="chat-feed" class="flex-1 overflow-y-auto p-6 space-y-6 font-mono bg-black/40">
+            </div>
 
-    chatForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const txt = chatInput.value.trim();
-      if (!txt) return;
+          <div class="p-6 bg-[#01140b] border-t border-[#D4AF37]/30">
+            <form id="chat-form" class="flex space-x-4">
+              <input type="text" id="chat-input" autocomplete="off" placeholder="Message the network..." class="flex-1 bg-[#021c10] border border-[#D4AF37]/50 text-white font-mono text-sm p-4 rounded-lg focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all" required>
+              <button type="submit" class="bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-black font-black uppercase tracking-widest px-8 rounded-lg hover:opacity-90 transition-all text-sm shadow-[0_0_15px_rgba(212,175,55,0.4)]">SEND</button>
+            </form>
+          </div>
+        </div>
+      </div>
 
-      chatFeed.innerHTML += createMessage('YOU', 'INITIATE', 'text-blue-400', getTime(), txt, true);
-      chatInput.value = '';
-      chatFeed.scrollTop = chatFeed.scrollHeight;
+      <div id="view-leaderboard" class="app-view p-6 md:p-12 lg:p-20">
+        <div class="max-w-5xl mx-auto">
+          <div class="mb-10 border-b border-[#D4AF37]/30 pb-6">
+            <h2 class="text-4xl font-black text-white uppercase tracking-widest">Operator Leaderboard</h2>
+            <p class="text-gray-400 font-mono mt-2">Top network extractors across all protocols in the last 30 days.</p>
+          </div>
+          
+          <div class="space-y-4 font-mono">
+            <div class="bg-gradient-to-r from-[#D4AF37]/20 to-transparent border border-[#D4AF37] p-6 rounded-lg flex items-center justify-between">
+              <div class="flex items-center gap-6">
+                <span class="text-3xl font-black text-[#D4AF37]">#1</span>
+                <div>
+                  <h4 class="text-lg font-black text-white">David_Alpha <span class="bg-[#D4AF37] text-black px-2 py-0.5 text-[10px] rounded ml-2">WHALE</span></h4>
+                  <p class="text-xs text-gray-400 mt-1">Conduit: E-Com & Delta Arbitrage</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-2xl font-black text-green-400">+$42,850</span>
+              </div>
+            </div>
+            <div class="bg-black/60 border border-gray-700 p-6 rounded-lg flex items-center justify-between">
+              <div class="flex items-center gap-6">
+                <span class="text-3xl font-black text-gray-400">#2</span>
+                <div>
+                  <h4 class="text-lg font-black text-white">Marcus_Phase2</h4>
+                  <p class="text-xs text-gray-400 mt-1">Conduit: High-Ticket Sales</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-2xl font-black text-green-400">+$28,400</span>
+              </div>
+            </div>
+            <div class="bg-black/60 border border-gray-700 p-6 rounded-lg flex items-center justify-between">
+              <div class="flex items-center gap-6">
+                <span class="text-3xl font-black text-gray-500">#3</span>
+                <div>
+                  <h4 class="text-lg font-black text-white">Sinner_00</h4>
+                  <p class="text-xs text-gray-400 mt-1">Conduit: Crypto Futures (AIOTUSD.P)</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-2xl font-black text-green-400">+$19,220</span>
+              </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-dashed border-gray-700">
+              <div class="bg-[#01140b] border border-blue-500/30 p-6 rounded-lg flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                  <span class="text-xl font-black text-blue-400">#1,842</span>
+                  <div>
+                    <h4 class="text-lg font-black text-white">YOU (Prameshwar)</h4>
+                    <p class="text-xs text-blue-400 mt-1">Status: Initializing Assets...</p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-lg font-black text-gray-500">PENDING PAYOUT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      setTimeout(() => {
-        const bot = bots[Math.floor(Math.random() * bots.length)];
-        chatFeed.innerHTML += createMessage(bot.name, bot.role, bot.color, getTime(), botReply(txt));
-        chatFeed.scrollTop = chatFeed.scrollHeight;
-      }, Math.random() * 1500 + 1000);
-    });
-  </script>
-</body>
-</html>
+      <div id="view-announcements" class="app-view p-6 md:p-12 lg:p-20">
+        <div class="max-w-4xl mx-auto">
+          <div class="mb-10 border-b border-[#D4AF37]/30 pb-6">
+            <h2 class="text-4xl font-black text-white uppercase tracking-widest">Intel Feed</h2>
+            <p class="text-gray-400 font-mono mt-2">Global commands and system updates.</p>
+          </div>
+          
+          <div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-[#D4AF37]/50 before:to-transparent">
+            
+            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+              <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#D4AF37] text-black font-black shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                !
+              </div>
+              <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-[#01140b] p-6 rounded-xl border border-[#D4AF37]/30 shadow-xl">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-bold text-[#D4AF37] text-sm">SYSTEM WIDE</span>
+                  <span class="font-mono text-xs text-gray-500">July 3, 2026</span>
+                </div>
+                <h3 class="text-lg font-black text-white uppercase tracking-wider mb-2">ARC Motherboard v2 Deployed</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">The entire platform has been upgraded to a single-page architecture. Navigating between the Vault, Dashboard, and War Room is now seamless.</p>
+              </div>
+            </div>
+
+            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+              <div class="flex items-center justify-center w-10 h-10 rounded-full border border-gray-700 bg-black text-gray-400 font-black shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                ✓
+              </div>
+              <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-black/60 p-6 rounded-xl border border-gray-700 shadow-xl">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-bold text-gray-400 text-sm">GUMROAD PROTOCOL</span>
+                  <span class="font-mono text-xs text-gray-500">June 28, 2026</span>
+                </div>
+                <h3 class="text-lg font-black text-white uppercase tracking-wider mb-2">KYC Verification Bypass Resolved</h3>
+                <p class="text-sm text-gray-400 leading-relaxed">Parental identity documentation routing is active. High-tier payouts to external Axis accounts are clearing successfully.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div id="view-settings" class="app-view p-6 md:p-12 lg:p-20">
+        <div class="max-w-4xl mx-auto">
+          <div class="mb-10 border-b border-[#D4AF37]/30 pb-6">
+            <h2 class="text-4xl font-black text-white uppercase tracking-widest">Routing & API</h2>
+            <p class="text-gray-400 font-mono mt-2">Configure your external data hooks and platform behavior.</p>
+          </div>
+          
+          <div class="space-y-8">
+            <div class="bg-[#01140b] border border-[#D4AF37]/30 rounded-xl p-8">
+              <h3 class="text-xl font-black text-[#FFFDD0] uppercase tracking-widest mb-6">Exchange Integration</h3>
+              
+              <div class="space-y-6 font-mono">
+                <div>
+                  <label class="block text-xs text-gray-400 mb-2 uppercase">Delta Exchange API Key</label>
+                  <input type="password" value="********************************" class="w-full bg-[#021c10] border border-gray-700 text-white p-3 roun
