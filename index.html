@@ -2,197 +2,236 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARC | The Royal Estate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ARC | Awaken Riches</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   
   <style>
-    /* ROYAL OLD MONEY THEME */
+    /* ROLEX GREEN SUNBURST THEME */
     body {
-      background-color: #040e0a; /* Deepest Emerald */
-      background-image: radial-gradient(circle at top right, #0a221a 0%, #040e0a 60%);
-      color: #F5F1E9; /* Ivory Cream */
+      background-color: #01120A; 
+      /* The exact deep, rich analog watch green */
+      background-image: radial-gradient(ellipse at center, #0B4226 0%, #01120A 100%);
+      background-attachment: fixed;
+      color: #F5F1E9;
       font-family: 'Inter', sans-serif;
       margin: 0;
       overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    h1, h2, h3, h4, .font-serif {
-      font-family: 'Playfair Display', serif;
-    }
+    .font-serif { font-family: 'Playfair Display', serif; }
 
-    /* Elegant Scrollbar */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #040e0a; }
-    ::-webkit-scrollbar-thumb { background: #D4AF37; }
+    /* Luxury App Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
 
-    /* Single Page App Routing */
-    .app-view { display: none; min-h-screen; width: 100%; animation: fade 0.5s ease; padding-bottom: 50px; }
+    /* SPA Routing */
+    .app-view { display: none; min-h-screen; width: 100%; padding-bottom: 90px; animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .app-view.active { display: block; }
-    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    /* Seamless Iframes */
-    .app-frame { width: 100%; height: 100vh; min-height: 900px; border: none; background: transparent; }
-
-    /* Old Money Accents */
-    .gold-accent { color: #D4AF37; }
-    .gold-border { border-color: #D4AF37; }
+    /* Core Luxury Accents */
+    .gold-text { color: #D4AF37; }
     .gold-bg { background-color: #D4AF37; }
     
-    .glass-card {
-      background: rgba(10, 34, 26, 0.6);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    /* Premium Glassmorphism */
+    .glass-panel {
+      background: rgba(4, 26, 14, 0.6);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    /* Leaderboard Animations */
+    .rank-shift { transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+    .flash-green { animation: profitFlash 1.5s ease-out; }
+    @keyframes profitFlash {
+      0% { color: #4ade80; text-shadow: 0 0 15px rgba(74,222,128,0.8); transform: scale(1.05); }
+      100% { color: #D4AF37; text-shadow: none; transform: scale(1); }
     }
   </style>
 </head>
 <body class="flex flex-col md:flex-row min-h-screen">
 
-  <div class="md:hidden flex justify-between items-center p-5 bg-[#030907] border-b border-[#D4AF37]/30 sticky top-0 z-50">
-    <div class="flex items-center gap-3">
-      <div class="w-8 h-8 gold-bg text-[#030907] flex items-center justify-center font-serif font-bold text-lg rounded-sm">A</div>
-      <h1 class="font-serif text-2xl gold-accent tracking-widest">ARC</h1>
-    </div>
-    <button id="mobile-menu-btn" class="gold-accent text-3xl focus:outline-none">☰</button>
-  </div>
-
-  <aside id="sidebar" class="hidden md:flex flex-col w-full md:w-72 bg-[#030907] border-b md:border-b-0 md:border-r border-[#D4AF37]/30 md:sticky md:top-0 md:h-screen z-40 shadow-2xl transition-all duration-300">
-    
-    <div class="p-8 hidden md:block">
-      <div class="flex items-center gap-4 mb-4">
-        <div class="w-12 h-12 gold-bg text-[#030907] flex items-center justify-center font-serif font-black text-2xl rounded-sm shadow-[0_0_15px_rgba(212,175,55,0.3)]">A</div>
+  <aside class="hidden md:flex flex-col w-72 bg-[#010C07]/90 backdrop-blur-xl border-r border-[#D4AF37]/30 sticky top-0 h-screen z-40 shadow-[10px_0_30px_rgba(0,0,0,0.8)]">
+    <div class="p-8">
+      <div class="flex items-center gap-4 mb-2">
+        <div class="w-12 h-12 bg-gradient-to-br from-[#D4AF37] to-[#8C6D1F] text-[#01120A] flex items-center justify-center font-serif font-black text-2xl rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.4)]">A</div>
         <div>
-          <h1 class="font-serif text-3xl gold-accent tracking-widest uppercase">ARC</h1>
-          <p class="text-[9px] text-[#F5F1E9]/60 tracking-[0.2em] uppercase font-bold mt-1">Private Estate</p>
+          <h1 class="font-serif text-3xl gold-text tracking-widest uppercase font-black">ARC</h1>
         </div>
       </div>
+      <p class="text-[9px] text-green-400 tracking-[0.3em] uppercase font-bold mt-1">LET'S MAKE MONEY</p>
     </div>
 
-    <nav class="flex-1 px-4 py-4 md:py-0 space-y-2">
-      <button onclick="switchView('home')" id="btn-home" class="nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 bg-[#D4AF37]/10 gold-accent border border-[#D4AF37]/50 font-serif">
-        <span>🏛️</span> The Estate
-      </button>
-      <button onclick="switchView('dashboard')" id="btn-dashboard" class="nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 text-[#F5F1E9]/70 border border-transparent hover:text-[#F5F1E9] hover:bg-[#D4AF37]/5 font-serif">
-        <span>⚖️</span> Dashboard
-      </button>
-      <button onclick="switchView('vault')" id="btn-vault" class="nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 text-[#F5F1E9]/70 border border-transparent hover:text-[#F5F1E9] hover:bg-[#D4AF37]/5 font-serif">
-        <span>🗝️</span> The Vault
-      </button>
-      <button onclick="switchView('warroom')" id="btn-warroom" class="nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 text-[#F5F1E9]/70 border border-transparent hover:text-[#F5F1E9] hover:bg-[#D4AF37]/5 font-serif relative">
-        <span>🖋️</span> Boardroom
-        <span class="absolute right-6 w-1.5 h-1.5 gold-bg rounded-full animate-pulse"></span>
+    <nav class="flex-1 px-4 space-y-2 mt-4">
+      <button onclick="switchView('home')" id="nav-home" class="nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-md text-xs tracking-widest uppercase transition-all bg-[#D4AF37]/15 gold-text border border-[#D4AF37]/50 font-bold shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+        <span class="text-lg">⬛</span> The Hub
       </button>
       
-      <div class="py-4 px-6"><div class="border-t border-[#D4AF37]/20"></div></div>
+      <a href="https://arc-calculator.vercel.app/" class="w-full flex items-center gap-4 px-6 py-4 rounded-md text-xs tracking-widest uppercase transition-all text-[#F5F1E9]/60 hover:text-white hover:bg-white/5 font-bold border border-transparent">
+        <span class="text-lg">⚡</span> Dashboard
+      </a>
+      <a href="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="w-full flex items-center gap-4 px-6 py-4 rounded-md text-xs tracking-widest uppercase transition-all text-[#F5F1E9]/60 hover:text-white hover:bg-white/5 font-bold border border-transparent">
+        <span class="text-lg">🔱</span> Business Models
+      </a>
       
-      <button onclick="switchView('leaderboard')" id="btn-leaderboard" class="nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 text-[#F5F1E9]/70 border border-transparent hover:text-[#F5F1E9] hover:bg-[#D4AF37]/5 font-serif">
-        <span>👑</span> Elite Roster
+      <button onclick="switchView('warroom')" id="nav-warroom" class="nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-md text-xs tracking-widest uppercase transition-all text-[#F5F1E9]/60 hover:text-white hover:bg-white/5 font-bold border border-transparent relative">
+        <span class="text-lg">👁️</span> War Room
+        <span class="absolute right-4 w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
+      </button>
+      
+      <div class="py-2 px-4"><div class="border-t border-[#D4AF37]/20"></div></div>
+      
+      <button onclick="switchView('leaderboard')" id="nav-leaderboard" class="nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-md text-xs tracking-widest uppercase transition-all text-[#F5F1E9]/60 hover:text-white hover:bg-white/5 font-bold border border-transparent">
+        <span class="text-lg">🏆</span> Leaderboard
       </button>
     </nav>
 
-    <div class="p-8 mt-auto">
-      <div class="border border-[#D4AF37]/20 p-4 rounded-sm bg-[#040e0a]">
-        <p class="text-[10px] text-[#F5F1E9]/50 uppercase tracking-widest mb-1">Estate Member</p>
-        <p class="font-serif gold-accent text-lg">Prameshwar</p>
-        <div class="mt-3 flex items-center gap-2 text-[10px] uppercase tracking-widest text-green-700 font-bold">
-          <span class="w-1.5 h-1.5 bg-green-700 rounded-full animate-ping"></span> Access Secured
+    <div class="p-6 mt-auto">
+      <div class="border border-[#D4AF37]/30 p-4 rounded-lg bg-[#01120A] shadow-inner">
+        <p class="text-[9px] text-[#F5F1E9]/50 uppercase tracking-widest mb-1">Active Operator</p>
+        <p class="font-bold text-[#F5F1E9] tracking-wider text-sm">Prameshwar</p>
+        <div class="mt-2 flex items-center gap-2 text-[9px] uppercase tracking-widest text-green-500 font-black">
+          <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></span> Network Secure
         </div>
       </div>
     </div>
   </aside>
 
-  <main class="flex-1 relative z-10 w-full overflow-x-hidden">
+  <div class="md:hidden fixed bottom-0 left-0 w-full bg-[#010C07]/95 backdrop-blur-xl border-t border-[#D4AF37]/30 z-50 flex justify-around items-center pb-safe pt-2 shadow-[0_-10px_30px_rgba(0,0,0,0.8)]">
+    <button onclick="switchView('home')" id="mob-home" class="mob-btn flex flex-col items-center p-2 gold-text transition-all scale-110">
+      <span class="text-xl mb-1">⬛</span>
+      <span class="text-[8px] font-bold uppercase tracking-widest">Hub</span>
+    </button>
+    <a href="https://arc-calculator.vercel.app/" class="flex flex-col items-center p-2 text-gray-500 hover:text-white transition-all">
+      <span class="text-xl mb-1">⚡</span>
+      <span class="text-[8px] font-bold uppercase tracking-widest">Dash</span>
+    </a>
+    <a href="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="flex flex-col items-center p-2 text-gray-500 hover:text-white transition-all">
+      <span class="text-xl mb-1">🔱</span>
+      <span class="text-[8px] font-bold uppercase tracking-widest">Vault</span>
+    </a>
+    <button onclick="switchView('warroom')" id="mob-warroom" class="mob-btn flex flex-col items-center p-2 text-gray-500 transition-all relative">
+      <span class="text-xl mb-1">👁️</span>
+      <span class="text-[8px] font-bold uppercase tracking-widest">War Room</span>
+      <span class="absolute top-1 right-2 w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+    </button>
+    <button onclick="switchView('leaderboard')" id="mob-leaderboard" class="mob-btn flex flex-col items-center p-2 text-gray-500 transition-all">
+      <span class="text-xl mb-1">🏆</span>
+      <span class="text-[8px] font-bold uppercase tracking-widest">Ranks</span>
+    </button>
+  </div>
+
+  <main class="flex-1 relative z-10 w-full pt-8 md:pt-0">
     
-    <div id="view-home" class="app-view active p-6 md:p-16 lg:p-24">
-      <div class="max-w-5xl mx-auto space-y-16">
+    <div id="view-home" class="app-view active p-6 md:p-16 lg:p-24 flex flex-col justify-center">
+      <div class="max-w-6xl mx-auto space-y-12">
         
-        <div class="text-center md:text-left border-l-0 md:border-l-2 gold-border md:pl-8">
-          <h2 class="text-4xl md:text-6xl font-serif text-[#F5F1E9] leading-tight mb-6">
-            Wealth is quiet. <br>
-            <span class="gold-accent italic">Execution is absolute.</span>
+        <div class="text-center md:text-left">
+          <h2 class="text-5xl md:text-8xl font-serif text-white font-black leading-[1.1] mb-6 tracking-tight drop-shadow-2xl">
+            Escape The <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F5F1E9]">Matrix.</span>
           </h2>
-          <p class="text-base md:text-lg text-[#F5F1E9]/70 font-light leading-relaxed max-w-3xl">
-            Welcome to the ARC Estate. You have exited the noise of the masses and entered the infrastructure of the elite. This platform is not a mere application; it is the central nervous system for your portfolio, assets, and business models. Precision, patience, and scale begin here.
+          <p class="text-sm md:text-lg text-[#F5F1E9]/80 font-medium leading-relaxed max-w-2xl border-l-2 border-[#D4AF37] pl-4 md:pl-6">
+            The system is rigged against you. We built a new one. Welcome to the absolute pinnacle of digital extraction. Speed kills the competition. Take action.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div onclick="switchView('dashboard')" class="glass-card p-10 cursor-pointer group hover:bg-[#0a221a]/80 transition-all">
-            <span class="text-3xl block mb-6">⚖️</span>
-            <h3 class="font-serif text-xl gold-accent mb-3 uppercase tracking-widest">The Dashboard</h3>
-            <p class="text-sm text-[#F5F1E9]/60 leading-relaxed font-light mb-8">Access your financial calculators and calibrate your capital allocation with absolute precision.</p>
-            <span class="text-[10px] uppercase tracking-widest gold-accent font-bold group-hover:pl-2 transition-all">Commence →</span>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          
+          <a href="https://arc-calculator.vercel.app/" class="glass-panel p-8 md:p-12 rounded-2xl cursor-pointer group hover:border-[#D4AF37] transition-all relative overflow-hidden block">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl group-hover:bg-[#D4AF37]/20 transition-all"></div>
+            <span class="text-4xl block mb-6 drop-shadow-md">⚡</span>
+            <h3 class="text-2xl font-black text-white mb-2 uppercase tracking-widest">ARC Dashboard</h3>
+            <p class="text-sm text-[#F5F1E9]/60 font-medium leading-relaxed mb-8">Access the financial conduits. Track your liquidity and scale your operations immediately.</p>
+            <span class="text-xs uppercase tracking-widest gold-text font-black group-hover:translate-x-2 inline-block transition-all bg-[#01120A] px-4 py-2 border border-[#D4AF37]/30 rounded-md">Initialize →</span>
+          </a>
 
-          <div onclick="switchView('vault')" class="glass-card p-10 cursor-pointer group hover:bg-[#0a221a]/80 transition-all">
-            <span class="text-3xl block mb-6">🗝️</span>
-            <h3 class="font-serif text-xl gold-accent mb-3 uppercase tracking-widest">The Vault</h3>
-            <p class="text-sm text-[#F5F1E9]/60 leading-relaxed font-light mb-8">Unlock timeless business protocols and revenue models reserved for the upper echelon.</p>
-            <span class="text-[10px] uppercase tracking-widest gold-accent font-bold group-hover:pl-2 transition-all">Unlock →</span>
-          </div>
+          <a href="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="glass-panel p-8 md:p-12 rounded-2xl cursor-pointer group hover:border-[#D4AF37] transition-all relative overflow-hidden block">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl group-hover:bg-[#D4AF37]/20 transition-all"></div>
+            <span class="text-4xl block mb-6 drop-shadow-md">🔱</span>
+            <h3 class="text-2xl font-black text-white mb-2 uppercase tracking-widest">Business Models</h3>
+            <p class="text-sm text-[#F5F1E9]/60 font-medium leading-relaxed mb-8">The complete Vault. Unlock the exact frameworks and protocols used by the top 1%.</p>
+            <span class="text-xs uppercase tracking-widest gold-text font-black group-hover:translate-x-2 inline-block transition-all bg-[#01120A] px-4 py-2 border border-[#D4AF37]/30 rounded-md">Unlock Vault →</span>
+          </a>
 
-          <div onclick="switchView('warroom')" class="glass-card p-10 cursor-pointer group hover:bg-[#0a221a]/80 transition-all">
-            <span class="text-3xl block mb-6">🖋️</span>
-            <h3 class="font-serif text-xl gold-accent mb-3 uppercase tracking-widest">The Boardroom</h3>
-            <p class="text-sm text-[#F5F1E9]/60 leading-relaxed font-light mb-8">Converse with other estate members. Share high-level intelligence and secure partnerships.</p>
-            <span class="text-[10px] uppercase tracking-widest gold-accent font-bold group-hover:pl-2 transition-all">Enter →</span>
+        </div>
+
+        <div class="glass-panel p-6 md:p-10 rounded-2xl mt-8">
+          <div class="flex items-center justify-between border-b border-[#D4AF37]/20 pb-4 mb-6">
+            <h3 class="font-black text-white uppercase tracking-widest text-sm">Global Network Status</h3>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              <span class="text-[10px] text-green-400 font-bold uppercase tracking-widest">Live</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 font-mono">
+            <div>
+              <p class="text-[10px] text-gray-400 uppercase mb-1">Total Network Vol</p>
+              <p id="total-vol" class="text-lg md:text-xl font-black text-[#D4AF37]">$14,124,850</p>
+            </div>
+            <div>
+              <p class="text-[10px] text-gray-400 uppercase mb-1">Active Operators</p>
+              <p class="text-lg md:text-xl font-black text-white">2,104</p>
+            </div>
+            <div>
+              <p class="text-[10px] text-gray-400 uppercase mb-1">AIOTUSD.P Signal</p>
+              <p class="text-lg md:text-xl font-black text-red-400">SHORTING</p>
+            </div>
+            <div>
+              <p class="text-[10px] text-gray-400 uppercase mb-1">Gumroad API</p>
+              <p class="text-lg md:text-xl font-black text-green-400">CLEARED</p>
+            </div>
           </div>
         </div>
 
-        <div class="glass-card p-8 md:p-12">
-          <h3 class="font-serif text-2xl gold-accent mb-6 pb-4 border-b border-[#D4AF37]/20">Estate Directives</h3>
-          <p class="text-[#F5F1E9]/70 font-light leading-relaxed mb-6">
-            The modern market rewards those who construct solid foundations. Ensure your Gumroad payout structures are aligned with your Axis banking terminals. Monitor the Delta Exchange futures, specifically the AIOTUSD.P routing, for optimal liquidity. 
-          </p>
-          <p class="text-sm gold-accent italic font-serif">"The amateur seeks a lucky strike. The professional builds a casino."</p>
-        </div>
       </div>
     </div>
 
-    <div id="view-dashboard" class="app-view p-0 md:p-8">
-      <div class="w-full h-full glass-card rounded-sm overflow-hidden shadow-2xl">
-        <iframe src="https://arc-calculator.vercel.app/" class="app-frame"></iframe>
-      </div>
-    </div>
-
-    <div id="view-vault" class="app-view p-0 md:p-8">
-      <div class="w-full h-full glass-card rounded-sm overflow-hidden shadow-2xl">
-        <iframe src="https://arc-vault-live-7plpojxkd-punitsaini252010-rgbs-projects.vercel.app/" class="app-frame"></iframe>
-      </div>
-    </div>
-
-    <div id="view-warroom" class="app-view p-4 md:p-10 h-screen md:h-[90vh]">
-      <div class="max-w-4xl mx-auto glass-card flex flex-col h-full rounded-sm overflow-hidden">
-        <div class="border-b border-[#D4AF37]/30 p-6 bg-[#030907] flex justify-between items-center z-10">
+    <div id="view-warroom" class="app-view p-0 md:p-8 h-screen md:h-[95vh]">
+      <div class="w-full max-w-5xl mx-auto glass-panel md:rounded-2xl flex flex-col h-full border-x-0 md:border-x">
+        
+        <div class="border-b border-[#D4AF37]/30 p-5 md:p-6 bg-[#010C07] flex justify-between items-center z-10 shrink-0">
           <div>
-            <h2 class="text-2xl font-serif gold-accent uppercase tracking-widest">The Boardroom</h2>
-            <p class="text-[10px] text-[#F5F1E9]/50 uppercase mt-1 tracking-widest">Private Member Discussions</p>
+            <h2 class="text-xl md:text-2xl font-black text-white uppercase tracking-widest">#War-Room</h2>
+            <p class="text-[10px] text-green-400 uppercase mt-1 tracking-widest font-bold">● Network Encrypted</p>
           </div>
         </div>
         
-        <div id="chat-feed" class="flex-1 overflow-y-auto p-6 space-y-6 bg-[#040e0a]">
+        <div id="chat-feed" class="flex-1 overflow-y-auto p-4 md:p-8 space-y-4 md:space-y-6 bg-black/20">
           </div>
 
-        <div class="p-6 bg-[#030907] border-t border-[#D4AF37]/30">
-          <form id="chat-form" class="flex space-x-4">
-            <input type="text" id="chat-input" autocomplete="off" placeholder="Address the estate members..." class="flex-1 bg-[#040e0a] border border-[#D4AF37]/30 text-[#F5F1E9] text-sm p-4 rounded-sm focus:outline-none focus:border-[#D4AF37] transition-all font-light" required>
-            <button type="submit" class="gold-bg text-[#030907] font-serif font-bold uppercase tracking-widest px-8 rounded-sm hover:brightness-110 transition-all text-sm">Send</button>
+        <div class="p-4 md:p-6 bg-[#010C07] border-t border-[#D4AF37]/30 shrink-0">
+          <form id="chat-form" class="flex gap-3">
+            <input type="text" id="chat-input" autocomplete="off" placeholder="Drop alpha..." class="flex-1 bg-[#01120A] border border-[#D4AF37]/40 text-white text-sm p-4 rounded-xl focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all font-medium shadow-inner" required>
+            <button type="submit" class="bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] text-[#01120A] font-black uppercase tracking-widest px-6 md:px-10 rounded-xl hover:opacity-90 transition-all text-sm shadow-[0_0_15px_rgba(212,175,55,0.4)]">Send</button>
           </form>
         </div>
       </div>
     </div>
 
-    <div id="view-leaderboard" class="app-view p-6 md:p-16">
+    <div id="view-leaderboard" class="app-view p-4 md:p-12 lg:p-20">
       <div class="max-w-4xl mx-auto">
-        <div class="mb-10 text-center md:text-left border-b border-[#D4AF37]/20 pb-8">
-          <h2 class="text-4xl font-serif gold-accent uppercase tracking-widest">The Elite Roster</h2>
-          <p class="text-[#F5F1E9]/60 font-light mt-3">The top 50 capital extractors within the ARC Estate. Valuations are updated in real-time across all asset classes.</p>
+        <div class="mb-10 text-center md:text-left border-b border-[#D4AF37]/30 pb-8">
+          <h2 class="text-4xl md:text-5xl font-black text-white uppercase tracking-widest drop-shadow-lg">Elite Roster</h2>
+          <p class="text-[#F5F1E9]/70 font-medium mt-3 max-w-xl text-sm leading-relaxed">The top 50 operators printing cash across all protocols. The board updates live as capital hits the wallets.</p>
         </div>
         
+        <div class="glass-panel p-4 rounded-xl mb-6 flex justify-between items-center border border-green-500/30 bg-green-500/5">
+          <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Total Value Extracted</span>
+          <span id="header-vol" class="text-xl font-black text-green-400">$14,124,850</span>
+        </div>
+
         <div id="leaderboard-list" class="space-y-3">
           </div>
       </div>
@@ -206,58 +245,60 @@
       document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active'));
       document.getElementById('view-' + viewId).classList.add('active');
       
+      // Desktop Nav Reset
       document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.className = "nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 text-[#F5F1E9]/70 border border-transparent hover:text-[#F5F1E9] hover:bg-[#D4AF37]/5 font-serif";
+        btn.className = "nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-md text-xs tracking-widest uppercase transition-all text-[#F5F1E9]/60 hover:text-white hover:bg-white/5 font-bold border border-transparent";
       });
+      const activeDesk = document.getElementById('nav-' + viewId);
+      if(activeDesk) activeDesk.className = "nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-md text-xs tracking-widest uppercase transition-all bg-[#D4AF37]/15 gold-text border border-[#D4AF37]/50 font-bold shadow-[0_0_15px_rgba(212,175,55,0.1)]";
       
-      const activeBtn = document.getElementById('btn-' + viewId);
-      if(activeBtn) {
-        activeBtn.className = "nav-btn w-full flex items-center gap-4 px-6 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 bg-[#D4AF37]/10 gold-accent border border-[#D4AF37]/50 font-serif";
-      }
-      
-      // Close mobile menu if open
-      document.getElementById('sidebar').classList.add('hidden');
+      // Mobile Nav Reset
+      document.querySelectorAll('.mob-btn').forEach(btn => {
+        btn.className = "mob-btn flex flex-col items-center p-2 text-gray-500 transition-all hover:text-white";
+      });
+      const activeMob = document.getElementById('mob-' + viewId);
+      if(activeMob) activeMob.className = "mob-btn flex flex-col items-center p-2 gold-text transition-all scale-110 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]";
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Mobile Menu Toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-      document.getElementById('sidebar').classList.toggle('hidden');
-    });
-
-    // --- 2. ROYAL BOARDROOM CHAT (Elegant Bots) ---
+    // --- 2. MODERN HUSTLER WAR ROOM ---
     const chatFeed = document.getElementById('chat-feed');
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById('chat-input');
 
     const bots = [
-      { name: 'Arthur Rothschild', role: 'Patriarch' },
-      { name: 'Victor Vanguard', role: 'Director' },
-      { name: 'Julian Mercer', role: 'Investor' },
-      { name: 'Charles Astor', role: 'Executive' }
+      { name: '0xHustle', role: 'WHALE', bg: 'bg-red-500/20 text-red-400 border-red-500/50' },
+      { name: 'phantom_x', role: 'ELITE', bg: 'bg-[#D4AF37]/20 text-[#D4AF37] border-[#D4AF37]/50' },
+      { name: 'real_marcus', role: 'SAVAGE', bg: 'bg-purple-500/20 text-purple-400 border-purple-500/50' },
+      { name: 'punit_arc', role: 'WHALE', bg: 'bg-red-500/20 text-red-400 border-red-500/50' },
+      { name: 'david_prints', role: 'HUSTLER', bg: 'bg-blue-500/20 text-blue-400 border-blue-500/50' }
     ];
 
     const initialHistory = [
-      { bot: bots[0], time: "08:14 AM", text: "The capital realignment strategy outlined in the Vault is proving highly effective. I've secured a 14% margin increase this quarter." },
-      { bot: bots[2], time: "09:45 AM", text: "Indeed. I deployed the arbitrage models on the Delta exchange yesterday. Execution was flawless." },
-      { bot: bots[1], time: "10:05 AM", text: "Ensure you are routing the excess liquidity back into the primary protocols. Compounding is the only path." }
+      { bot: bots[0], time: "11:14 AM", text: "bro this system is actually broken 💀 printed 2k before waking up" },
+      { bot: bots[2], time: "11:17 AM", text: "fr no cap. the organic funnel method from the vault is printing crazy margins rn" },
+      { bot: bots[3], time: "11:21 AM", text: "just closed the delta short W. W system W network 🔥" },
+      { bot: bots[1], time: "11:25 AM", text: "who else is scaling the protocol 3 today? need to verify my dashboard metrics" }
     ];
 
-    function createMessage(name, role, time, text, isUser = false) {
-      const bg = isUser ? 'bg-[#D4AF37]/10 border-[#D4AF37]/50' : 'bg-[#0a221a]/40 border-[#D4AF37]/20';
-      const align = isUser ? 'ml-auto' : 'mr-auto';
-      const nameColor = isUser ? 'text-[#D4AF37]' : 'text-[#F5F1E9]';
+    function createMessage(name, role, tagClass, time, text, isUser = false) {
+      const align = isUser ? 'ml-auto items-end text-right' : 'mr-auto items-start text-left';
+      const msgBg = isUser ? 'bg-gradient-to-r from-[#0B4226] to-[#01120A] border border-[#D4AF37]/50' : 'glass-panel';
+      const textColor = isUser ? 'text-[#D4AF37]' : 'text-white';
+      const nameColor = isUser ? 'text-[#D4AF37]' : 'text-gray-300';
       
       return `
-        <div class="p-6 ${bg} border rounded-sm max-w-[95%] md:max-w-[80%] ${align} shadow-md backdrop-blur-sm">
-          <div class="flex justify-between items-center mb-3 pb-2 border-b border-[#D4AF37]/10">
-            <div class="flex items-center gap-3">
-              <span class="font-serif ${nameColor} text-lg tracking-wide">${name}</span>
-              <span class="bg-[#040e0a] text-[#D4AF37] px-2 py-0.5 text-[9px] uppercase tracking-widest border border-[#D4AF37]/30">${role}</span>
-            </div>
-            <span class="text-[#F5F1E9]/40 text-xs font-light">${time}</span>
+        <div class="flex flex-col max-w-[85%] md:max-w-[70%] ${align} space-y-1 mb-2">
+          <div class="flex items-center gap-2 px-1">
+            <span class="font-black text-[11px] ${nameColor} tracking-wider">${name}</span>
+            ${isUser ? `<span class="px-1.5 py-0.5 text-[8px] font-black uppercase rounded bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/50">YOU</span>` 
+                     : `<span class="px-1.5 py-0.5 text-[8px] font-black uppercase rounded ${tagClass}">${role}</span>`}
+            <span class="text-gray-600 text-[10px] font-bold">${time}</span>
           </div>
-          <p class="text-[#F5F1E9]/80 font-light leading-relaxed text-sm md:text-base">${text}</p>
+          <div class="p-4 ${msgBg} rounded-2xl shadow-xl">
+            <p class="text-sm font-medium ${textColor} leading-relaxed">${text}</p>
+          </div>
         </div>
       `;
     }
@@ -268,15 +309,17 @@
     }
 
     initialHistory.forEach(msg => {
-      chatFeed.innerHTML += createMessage(msg.bot.name, msg.bot.role, msg.time, msg.text);
+      chatFeed.innerHTML += createMessage(msg.bot.name, msg.bot.role, msg.bot.bg, msg.time, msg.text);
     });
     chatFeed.scrollTop = chatFeed.scrollHeight;
 
     function botReply(txt) {
       const t = txt.toLowerCase();
-      if(t.includes('how') || t.includes('help')) return "I advise you to consult the Vault. The frameworks laid out there require no interpretation, only execution.";
-      if(t.includes('money') || t.includes('profit') || t.includes('scale')) return "Excellent. Allocate the surplus wisely. Wealth favors the patient but punishes the stagnant.";
-      return "I concur. Focus on maintaining volume and absolute precision.";
+      if(t.includes('how') || t.includes('help') || t.includes('?')) return "bro just click the vault tab. it's literally step by step.";
+      if(t.includes('money') || t.includes('$') || t.includes('win') || t.includes('profit')) return "massive W 🔥 scale that shit up right now";
+      if(t.includes('yo') || t.includes('hi') || t.includes('sup')) return "yo bro. volume up let's get it";
+      if(t.includes('fuck') || t.includes('shit') || t.includes('cap')) return "💀 fr bro the matrix is mad right now";
+      return "facts bro. just execute the protocol no cap.";
     }
 
     chatForm.addEventListener('submit', function(e) {
@@ -284,79 +327,115 @@
       const txt = chatInput.value.trim();
       if (!txt) return;
 
-      chatFeed.innerHTML += createMessage('Prameshwar', 'Estate Member', getTime(), txt, true);
+      chatFeed.innerHTML += createMessage('Prameshwar', '', '', getTime(), txt, true);
       chatInput.value = '';
       chatFeed.scrollTop = chatFeed.scrollHeight;
 
       setTimeout(() => {
         const bot = bots[Math.floor(Math.random() * bots.length)];
-        chatFeed.innerHTML += createMessage(bot.name, bot.role, getTime(), botReply(txt));
+        chatFeed.innerHTML += createMessage(bot.name, bot.role, bot.bg, getTime(), botReply(txt));
         chatFeed.scrollTop = chatFeed.scrollHeight;
-      }, Math.random() * 2000 + 1500);
+      }, Math.random() * 1200 + 800);
     });
 
-    // --- 3. REAL-TIME TOP 50 LEADERBOARD ENGINE ---
-    const firstNames = ["James", "Alexander", "William", "Henry", "Arthur", "Louis", "Charles", "Thomas", "Edward", "Marcus", "David", "Richard", "Philip", "Victor", "Julian", "Harrison", "Alistair", "Theodore"];
-    const lastNames = ["Sterling", "Rothschild", "Vanguard", "Astor", "Winslow", "Prescott", "Carnegie", "Rockefeller", "Sinclair", "DuPont", "Mercer", "Huntington", "Bancroft", "Fairchild"];
-    const leaderboardList = document.getElementById('leaderboard-list');
+    // --- 3. $14M LIVE LEADERBOARD ENGINE ---
+    const modNames = ["0xHustle", "phantom_x", "real_marcus", "Savage_Ecom", "david_prints", "punit_arc", "TateW", "matrix_breaker", "eth_whale", "scale_god", "apex_predator", "ghost_protocol", "cash_flow_king", "sigma_grind", "ecom_sinner", "delta_sniper", "alpha_mindset"];
+    const lbList = document.getElementById('leaderboard-list');
+    const totalVolText = document.getElementById('total-vol');
+    const headerVolText = document.getElementById('header-vol');
     
     let players = [];
+    let totalPool = 0;
     
-    // Generate 50 Players
+    // Generate 50 Players scaled to ~14 Million total
     for(let i=1; i<=50; i++) {
-      let name = i === 18 ? "Prameshwar (YOU)" : firstNames[Math.floor(Math.random()*firstNames.length)] + " " + lastNames[Math.floor(Math.random()*lastNames.length)];
-      let baseAmount = 850000 - (i * 12000) + Math.floor(Math.random() * 5000);
-      if (i === 18) baseAmount = 642500; // Your initial wealth
+      let isYou = i === 15;
+      let name = isYou ? "Prameshwar" : modNames[Math.floor(Math.random()*modNames.length)] + Math.floor(Math.random()*99);
+      // Top player around $850k, scaling down to ~$30k
+      let baseAmount = Math.floor(850000 * Math.pow(0.92, i)) + Math.floor(Math.random() * 20000); 
       
+      let tagBg, tagRole;
+      if (baseAmount > 400000) { tagRole = 'WHALE'; tagBg = 'bg-red-500/20 text-red-400 border-red-500/50'; }
+      else if (baseAmount > 150000) { tagRole = 'SAVAGE'; tagBg = 'bg-purple-500/20 text-purple-400 border-purple-500/50'; }
+      else { tagRole = 'HUSTLER'; tagBg = 'bg-blue-500/20 text-blue-400 border-blue-500/50'; }
+
+      if(isYou) {
+        tagRole = 'YOU';
+        tagBg = 'bg-[#D4AF37]/20 text-[#D4AF37] border-[#D4AF37]/50';
+      }
+
       players.push({
-        rank: i,
+        id: i,
         name: name,
         amount: baseAmount,
-        isUser: i === 18
+        isUser: isYou,
+        tagRole: tagRole,
+        tagBg: tagBg,
+        flash: false
       });
+      totalPool += baseAmount;
+    }
+
+    function formatMoney(num) {
+      return "$" + num.toLocaleString('en-US', {minimumFractionDigits: 0});
     }
 
     function renderLeaderboard() {
-      leaderboardList.innerHTML = '';
-      players.forEach(p => {
-        let bg = p.isUser ? 'bg-[#D4AF37]/10 border-[#D4AF37]' : 'bg-[#0a221a]/40 border-[#D4AF37]/10';
-        let rankColor = p.rank <= 3 ? 'text-[#D4AF37]' : 'text-[#F5F1E9]/50';
-        let nameColor = p.isUser ? 'text-[#D4AF37]' : 'text-[#F5F1E9]';
-        
-        leaderboardList.innerHTML += `
-          <div class="p-5 ${bg} border rounded-sm flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-300 backdrop-blur-sm">
-            <div class="flex items-center gap-6">
-              <span class="text-2xl font-serif ${rankColor} w-10 text-center">#${p.rank}</span>
+      lbList.innerHTML = '';
+      players.forEach((p, index) => {
+        let rank = index + 1;
+        let cardBg = p.isUser ? 'bg-[#0B4226]/80 border-[#D4AF37]/60 shadow-[0_0_20px_rgba(212,175,55,0.2)]' : 'glass-panel hover:bg-[#0B4226]/40 transition-all';
+        let rankColor = rank <= 3 ? 'text-[#D4AF37]' : 'text-[#F5F1E9]/40';
+        let amountClass = p.flash ? 'flash-green font-black' : 'text-[#D4AF37] font-bold';
+        if (p.isUser && !p.flash) amountClass = 'text-white font-black';
+
+        lbList.innerHTML += `
+          <div class="p-4 md:p-5 ${cardBg} rounded-xl flex items-center justify-between gap-4 rank-shift" id="player-${p.id}">
+            <div class="flex items-center gap-4 md:gap-6">
+              <span class="text-xl md:text-2xl font-black ${rankColor} w-8 text-center drop-shadow-md">#${rank}</span>
               <div>
-                <h4 class="font-serif ${nameColor} text-lg tracking-wide">${p.name} ${p.isUser ? '<span class="bg-[#D4AF37] text-[#030907] px-2 py-0.5 ml-2 text-[9px] uppercase tracking-widest rounded-sm">Estate Member</span>' : ''}</h4>
+                <h4 class="font-black text-white tracking-wide text-sm md:text-base flex items-center gap-2">
+                  ${p.name} 
+                  <span class="px-1.5 py-0.5 text-[8px] font-black uppercase rounded border ${p.tagBg}">${p.tagRole}</span>
+                </h4>
               </div>
             </div>
-            <span class="font-mono text-[#D4AF37] font-light text-xl md:text-right w-full md:w-auto">$${p.amount.toLocaleString('en-US', {minimumFractionDigits: 0})}</span>
+            <span class="font-mono ${amountClass} text-lg md:text-xl text-right">${formatMoney(p.amount)}</span>
           </div>
         `;
       });
+
+      // Reset flash flag
+      players.forEach(p => p.flash = false);
+      
+      // Update Total Volume displays
+      let displayVol = formatMoney(totalPool);
+      if(totalVolText) totalVolText.innerText = displayVol;
+      if(headerVolText) headerVolText.innerText = displayVol;
     }
     
+    // Initial sort and render
+    players.sort((a,b) => b.amount - a.amount);
     renderLeaderboard();
 
-    // The Live Simulation Loop
+    // The Live Injection Loop (Every 3 seconds)
     setInterval(() => {
-      // Pick 3 random players to receive capital injections
-      for(let k=0; k<3; k++) {
+      // Pick 2-4 random players to pump
+      let numInjects = Math.floor(Math.random() * 3) + 2;
+      for(let k=0; k<numInjects; k++) {
         let index = Math.floor(Math.random() * 50);
-        let injection = Math.floor(Math.random() * 8500) + 1500;
+        let injection = Math.floor(Math.random() * 4500) + 500;
         players[index].amount += injection;
+        players[index].flash = true; // Trigger flash animation
+        totalPool += injection;
       }
       
-      // Re-sort the elite based on new wealth
+      // Re-sort array based on new amounts
       players.sort((a,b) => b.amount - a.amount);
       
-      // Update ranks
-      players.forEach((p, i) => p.rank = i + 1);
-      
-      // Re-render the board
+      // Re-render
       renderLeaderboard();
-    }, 4500); // Updates every 4.5 seconds
+    }, 3000);
 
   </script>
 </body>
